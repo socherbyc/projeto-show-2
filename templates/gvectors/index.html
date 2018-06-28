@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h1 class="center-align orange lighten-3">Trab2</h1>
+
+    <div class="collection">
+        {% for gvector in gvectors %}
+            <li class="collection-item">
+                <a href="{% url 'gvectors_show' gvector_id=gvector.id %}">#{{ gvector.id }}</a><br>
+                <b>description</b>: {{ gvector.description }}<br>
+                <b>created_at</b>: {{ gvector.created_at }}<br>
+                <b>percentage</b>: {{ gvector.percentage_text }}<br>
+            </li>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'gvectors_create' %}" class="btn">Create</a>
+{% endblock %}

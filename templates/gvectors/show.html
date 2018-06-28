@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <h2 class="center-align orange lighten-3">#{{ gvector.id }}</h2>
+
+    <div class="card">
+        <div class="card-content">
+            {{ gvector.description }}<br>
+            <a download href="/media/{{ gvector.gvector }}">download</a>
+        </div>
+        <div class="card-action">
+            {{ gvector.created_at }}<br>
+            <span id="gvector_percentage">{{ gvector.percentage_text }}</span>
+            {% if gvector.is_processing %}
+                <br>is being processing...
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'gvectors_index' %}" class="btn">Back</a>
+    <br><br>
+    <a href="{% url 'gvectors_process' gvector_id=gvector.id %}" class="btn">Process</a>
+    <br><br>
+    <a href="{% url 'gvectors_delete' gvector_id=gvector.id %}" class="btn red">Delete</a>
+
+    <script>
+        (function() {
+            var url = '{% url "gvectors_show_json" gvector_id=gvector.id %}';
+            // var url = 'http://192.168.33.17:8000/gvectors/7.json';
+            var loopUpdatePercentage = function() {
+                $.ajax({
+                    url: url,
+                    dataType: "json",
+                    success: function(data) {
+                        $('#gvector_percentage').text(data.gvector.percentage_text);
+                        if (data.gvector.is_processing) {
+                            setTimeout(loopUpdatePercentage, 1000);
+                        }
+                    }
+                })
+            };
+            loopUpdatePercentage();
+        })();
+    </script>
+
+{% endblock %}
