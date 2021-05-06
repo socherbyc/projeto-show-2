@@ -1,4 +1,4 @@
-# Projecot Show 2
+# Projeto Show 2
 
 It is just a school project.
 
