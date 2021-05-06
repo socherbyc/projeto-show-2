@@ -1,11 +1,6 @@
+# Projecot Show 2
 
-
-
-
-
-8-> integrar com programa que multiplica as matrizes
-
-
+It is just a school project.
 
 ## setup
 ```
